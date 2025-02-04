@@ -88,5 +88,10 @@ typings/
 # Vite
 .vite/
 
-# Electron-Forge
-out/
+/out/tipperapi-win32-x64/
+
+.idea/
+
+*.rar
+*.zip
+/.idea/
