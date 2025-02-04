@@ -4,8 +4,19 @@ const started = require('electron-squirrel-startup');
 const {CONST, TipWrapper, TipComparer} = require("./constants.js");
 const {JSDOM} = require("jsdom");
 const {readFileSync} = require("node:fs");
-const { updateElectronApp } = require('update-electron-app');
+const { updateElectronApp, UpdateSourceType} = require('update-electron-app');
+const log = require('electron-log');
 
+// Set the log level to 'debug' for more verbose output
+log.transports.file.level = 'debug';
+
+updateElectronApp({
+  updateSource:{
+    type: UpdateSourceType.ElectronPublicUpdateService,
+    repo: "Domped/tipper"
+  },
+  logger: log,
+});
 let scraperWindow;
 let scrapingInterval;
 let mainWindow;
@@ -26,7 +37,7 @@ const createWindow = () => {
     },
   });
 
-  updateElectronApp();
+
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
