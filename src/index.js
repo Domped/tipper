@@ -4,6 +4,7 @@ const started = require('electron-squirrel-startup');
 const {CONST, TipWrapper, TipComparer} = require("./constants.js");
 const {JSDOM} = require("jsdom");
 const {readFileSync} = require("node:fs");
+const { updateElectronApp } = require('update-electron-app');
 
 let scraperWindow;
 let scrapingInterval;
@@ -25,6 +26,7 @@ const createWindow = () => {
     },
   });
 
+  updateElectronApp();
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
