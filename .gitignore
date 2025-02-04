@@ -91,3 +91,5 @@ typings/
 /out/tipperapi-win32-x64/
 
 .idea/
+
+/dist/

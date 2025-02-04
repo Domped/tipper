@@ -9,7 +9,15 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "postinstall": "electron-builder install-app-deps",
+    "release": "electron-builder --windows --publish always"
+  },
+  "build": {
+    "productName": "TipperAPI",
+    "win": {
+      "target": "squirrel"
+    }
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.6.1",
@@ -22,6 +30,7 @@
     "@electron-forge/publisher-github": "^7.6.1",
     "@electron/fuses": "^1.8.0",
     "electron": "34.0.2",
+    "electron-builder": "^25.1.8",
     "electron-winstaller": "^5.4.0"
   },
   "keywords": [],
