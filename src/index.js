@@ -13,7 +13,6 @@ let updates = 0;
 if (started) {
   app.quit();
 }
-
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
