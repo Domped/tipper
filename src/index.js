@@ -216,3 +216,13 @@ function siftData(data)
   }
 
 }
+
+//multi-pc support
+//fortuna,tipsport (chance),bong88
+//fortuna-tipsport
+// --favorit 1,7 az 2,4 primy .... pocet golu... hedicap (0, -1, -1.5)... jestli sedi rozmezi, muzeme srovnat
+// --pl < 1%.... kdyz se blizi k 0, upozornit say
+// {predcisli, kdo vyhraje}
+// {}
+// 0,5 ==> hledam dvjotip else hendicap
+//
