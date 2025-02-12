@@ -47,6 +47,8 @@
     "electron-log": "^5.3.0",
     "electron-squirrel-startup": "^1.0.1",
     "jsdom": "^26.0.0",
-    "update-electron-app": "^3.1.1"
+    "string-similarity": "^4.0.4",
+    "update-electron-app": "^3.1.1",
+    "ws": "^8.18.0"
   }
 }

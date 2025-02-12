@@ -30,46 +30,51 @@
       const {GetProfitMarginCombo} = require("./constants.js");
       const {TipWrapper} = require("./constants.js");
 
+      ipcRenderer.on("test", (event, data) => {
+        // document.body.innerHTML = data['tips'];
+        console.log(JSON.stringify(data['tips']))
+      });
+
       ipcRenderer.on("scraped", (event, data) => {
+        if(data['pairs'].length === 0)
+          return;
+
         const resultsContainer = document.getElementById("container");
         resultsContainer.innerHTML = "";
 
+        var innerTableBody = document.createElement("tbody");
         document.getElementById("update-count").innerText = data['updates'].toString();
         data['pairs'].forEach((pair) => {
-          let fort = pair['fortuna'] ;
-          let tipsp = pair['tipsport']
+          // let fort = pair['fortuna'] ;
+          // let tipsp = pair['tipsport']
 
-          var testM = GetProfitMarginCombo(fort.oddWinFirst, fort.oddNotLossSecond) * 100
-          var testT = GetProfitMarginCombo(tipsp.oddWinFirst, tipsp.oddNotLossSecond) * 100
+          // var testM = GetProfitMarginCombo(fort.oddWinFirst, fort.oddNotLossSecond) * 100
+          // var testT = GetProfitMarginCombo(tipsp.oddWinFirst, tipsp.oddNotLossSecond) * 100
+          //
+          // var testMM = GetProfitMarginCombo(fort.oddWinSecond, fort.oddNotLossFirst) * 100
+          // var testMT = GetProfitMarginCombo(tipsp.oddWinSecond, fort.oddNotLossFirst) * 100
+          //
+          // var marginLvN = GetProfitMarginCombo(fort.oddWinFirst, tipsp.oddNotLossSecond) * 100
+          // var marginNvL = GetProfitMarginCombo(fort.oddNotLossFirst, tipsp.oddWinSecond) * 100
+          //
+          // var marginLvNT = GetProfitMarginCombo(tipsp.oddWinFirst, fort.oddNotLossSecond) * 100
+          // var marginNvLT = GetProfitMarginCombo(tipsp.oddNotLossFirst, fort.oddWinSecond) * 100
 
-          var testMM = GetProfitMarginCombo(fort.oddWinSecond, fort.oddNotLossFirst) * 100
-          var testMT = GetProfitMarginCombo(tipsp.oddWinSecond, fort.oddNotLossFirst) * 100
+          const trContainer = document.createElement("tr");
 
-          var marginLvN = GetProfitMarginCombo(fort.oddWinFirst, tipsp.oddNotLossSecond) * 100
-          var marginNvL = GetProfitMarginCombo(fort.oddNotLossFirst, tipsp.oddWinSecond) * 100
+          const nameElement = document.createElement("td");
+          nameElement.textContent = pair.match; // Assuming 'match' is the name
+          trContainer.appendChild(nameElement);
 
-          var marginLvNT = GetProfitMarginCombo(tipsp.oddWinFirst, fort.oddNotLossSecond) * 100
-          var marginNvLT = GetProfitMarginCombo(tipsp.oddNotLossFirst, fort.oddWinSecond) * 100
+          const marginElement = document.createElement("td");
+          marginElement.textContent = "Kurz: " + pair.TEMPoddFirst + " : " + pair.TEMPoddSecond + ", vyhra: " + pair.pl.toFixed(2) + "%, typ sazky: " + pair.type; // Format the margin
+          marginElement.style.color = pair.pl < -1 ? "red" : "green";
+          trContainer.appendChild(marginElement);
 
-          const flexContainer = document.createElement("div");
-          flexContainer.className = "flex-container";
-
-          const nameElement = document.createElement("div");
-          nameElement.className = "flex-item";
-          nameElement.textContent = fort.match; // Assuming 'match' is the name
-          flexContainer.appendChild(nameElement);
-
-          // Create and append the profit margin elements
-          [testM, testT, testMM, testMT, marginLvN, marginNvL, marginLvNT, marginNvLT].forEach((margin) => {
-            const marginElement = document.createElement("div");
-            marginElement.className = "flex-item";
-            marginElement.textContent = margin.toFixed(2) + "%"; // Format the margin
-            marginElement.style.color = margin < 0 ? "red" : "green";
-            flexContainer.appendChild(marginElement);
-          });
 
           // Append the flex container to the results container
-          resultsContainer.appendChild(flexContainer);
+          innerTableBody.appendChild(trContainer);
+          resultsContainer.appendChild(innerTableBody);
         });
       });
     </script>
